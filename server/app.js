@@ -9,12 +9,12 @@ const cors = require("cors");
 dotenv.config();
 mongoose
   .connect(process.env.DBURL, {
-    tls: true,
-    tlsAllowInvalidCertificates: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
   })
   .then((data) => {
     if (!data) console.error("error with mongoose connection");
-    else console.log("Mongoose connected");
+    else console.log("Mongoose connected✅");
   });
 
 const indexRouter = require("./routes/index");

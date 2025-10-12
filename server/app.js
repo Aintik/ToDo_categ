@@ -10,7 +10,8 @@ dotenv.config();
 mongoose
   .connect(process.env.DBURL, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    tls: true,
   })
   .then((data) => {
     if (!data) console.error("error with mongoose connection");

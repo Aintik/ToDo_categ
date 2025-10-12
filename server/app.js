@@ -7,10 +7,15 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 
 dotenv.config();
-mongoose.connect(process.env.DBURL).then((data) => {
-  if (!data) console.error("error with mongoose connection");
-  else console.log("Mongoose connected");
-});
+mongoose
+  .connect(process.env.DBURL, {
+    tls: true,
+    tlsAllowInvalidCertificates: true,
+  })
+  .then((data) => {
+    if (!data) console.error("error with mongoose connection");
+    else console.log("Mongoose connected");
+  });
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");

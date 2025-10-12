@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ColorPicker from "./UI/ColorPicker/ColorPicker";
 import axios from "axios";
 
-const API = "http://localhost:3001";
+const API = "https://todo-categ.onrender.com";
 
 const Category = ({ deleted }) => {
   const [category, setCategory] = useState([]);

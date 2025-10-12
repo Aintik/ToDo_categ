@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Item from "./Item";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-const API = "http://localhost:3001";
+const API = "https://todo-categ.onrender.com";
 
 const Task = () => {
   let { id } = useParams()

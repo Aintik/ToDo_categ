@@ -3,7 +3,7 @@ import "../styles/Item.css";
 import bin from "../assets/bin.svg";
 import tick from "../assets/tick.svg";
 import axios from "axios";
-const API = "http://localhost:3001";
+const API = "https://todo-categ.onrender.com";
 
 let a = 0;
 const Item = (props) => {

@@ -1,0 +1,102 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:100,100italic,300,300italic,regular,italic,700,700italic,900,900italic);
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Lato", sans-serif;
+}
+
+.ToDoPage {
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.Category {
+  min-width: 21.4%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 30px 30px 0 50px;
+  border-right: 2px solid #d8d8d8;
+}
+
+.Category h1 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 31px;
+  line-height: 37px;
+  color: #000000;
+}
+
+.Category > input,
+.Task > input {
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  background: #f3f3f3;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  padding: 13px 27px;
+  margin-top: 25px;
+}
+
+.Category > input::placeholder,
+.Task > input::placeholder {
+  color: #b5b5b5;
+}
+
+.Category ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin-top: 32px;
+  gap: 24px;
+}
+
+.Category ul .allTask a {
+  color: #000;
+}
+
+.Category ul .allTask a div {
+  background-color: #000;
+}
+
+.Category ul li a {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 26px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.Category ul li {
+  position: relative;
+}
+
+.Category ul li a div.round {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+}
+
+.tre {
+  display: none;
+}
+
+.Task {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 78.6%;
+  padding: 30px 50px;
+}

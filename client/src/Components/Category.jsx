@@ -7,7 +7,13 @@ const API = "https://todo-categ.onrender.com";
 const Category = ({ deleted }) => {
   const [category, setCategory] = useState([]);
   async function fetchCategory() {
-    let res = await (await fetch(`${API}/category`)).json();
+    let res = await (await fetch(`${API}/category`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })).json();
     setCategory(res);
   }
   async function addCategory(event) {

@@ -11,7 +11,7 @@ const Task = () => {
     let URL = id ? `${API}/category/one/${id}` : `${API}/category/`;
     let res = await (
       await fetch(URL, {
-        method: "DELETE",
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,

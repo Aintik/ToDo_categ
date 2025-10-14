@@ -14,30 +14,41 @@ const Category = ({ deleted }) => {
     if (event.code === "Enter") {
       const value = event.target.value.trim();
       if (value.length > 0)
-        await axios.post(`${API}/category/add`, {
-          name: value,
-        });
+        await axios.post(
+          `${API}/category/add`,
+          { name: value },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
       event.target.value = "";
       fetchCategory();
     }
   }
   function deleteCateg(event) {
     setTimeout(() => {
-      axios.get(`${API}/category/delete/${event.target.id}`);
+      axios.get(`${API}/category/delete/${event.target.id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       fetchCategory();
-      window.location.replace("/")
-    }, 1050)
+      window.location.replace("/");
+    }, 1050);
   }
   function rew(e) {
-    document.querySelectorAll('.tre').forEach(item => {
-      item.style.display = "none"
-    })
-    e.target.parentElement.parentElement.querySelector(".tre").style.display = "flex"
+    document.querySelectorAll(".tre").forEach((item) => {
+      item.style.display = "none";
+    });
+    e.target.parentElement.parentElement.querySelector(".tre").style.display =
+      "flex";
   }
   function rew1(e) {
-    document.querySelectorAll('.tre').forEach(item => {
-      item.style.display = "none"
-    })
+    document.querySelectorAll(".tre").forEach((item) => {
+      item.style.display = "none";
+    });
   }
   useEffect(() => {
     fetchCategory();
@@ -69,13 +80,18 @@ const Category = ({ deleted }) => {
                 title="Hold 2sec to delete"
                 id={item._id}
               >
-                <div onMouseEnter={rew} className="round" style={{ backgroundColor: item.color }}></div> {item.name}
+                <div
+                  onMouseEnter={rew}
+                  className="round"
+                  style={{ backgroundColor: item.color }}
+                ></div>{" "}
+                {item.name}
               </a>
             </li>
           );
         })}
       </ul>
-    </div >
+    </div>
   );
 };
 

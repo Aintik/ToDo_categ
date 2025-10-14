@@ -9,16 +9,32 @@ const Task = () => {
   const [category, setCategory] = useState([]);
   async function fetchCategory() {
     let URL = id ? `${API}/category/one/${id}` : `${API}/category/`;
-    let res = await (await fetch(URL)).json();
+    let res = await (
+      await fetch(URL, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+    ).json();
     setCategory(res);
   }
   async function addTask(event) {
     if (event.code === "Enter") {
       const value = event.target.value.trim();
       if (value.length > 0)
-        await axios.post(`${API}/category/list/add/${id}`, {
-          title: value,
-        });
+        await axios.post(
+          `${API}/category/list/add/${id}`,
+          {
+            title: value,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
       event.target.value = "";
       fetchCategory();
     }

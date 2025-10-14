@@ -10,7 +10,14 @@ const Item = (props) => {
   a++;
   function deleteList() {
     fetch(
-      `${API}/category/list/delete/${props.value._id}/of/${props.idCateg._id}`
+      `${API}/category/list/delete/${props.value._id}/of/${props.idCateg._id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
+      }
     );
     props.refresh();
   }
@@ -19,6 +26,11 @@ const Item = (props) => {
       `${API}/category/status/${props.value._id}/of/${props.idCateg._id}`,
       {
         status: e.target.checked,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       }
     );
     props.refresh();

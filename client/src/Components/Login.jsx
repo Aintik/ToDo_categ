@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../api/axios";
 
-const API = "https://todo-categ.onrender.com";
 
 const Login = () => {
   const [form, setForm] = useState({ username: "", password: "" });
@@ -12,7 +11,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${API}/users/login`, form);
+      const res = await api.post(`/auth/login`, form);
       localStorage.setItem("token", res.data.token);
       alert("Login successful!");
       window.location.href = "/"; // redirect to home or dashboard

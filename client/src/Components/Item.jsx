@@ -2,36 +2,22 @@ import React from "react";
 import "../styles/Item.css";
 import bin from "../assets/bin.svg";
 import tick from "../assets/tick.svg";
-import axios from "axios";
-const API = "https://todo-categ.onrender.com";
+import api from "../api/axios";
+
 
 let a = 0;
 const Item = (props) => {
   a++;
   function deleteList() {
-    fetch(
-      `${API}/category/list/delete/${props.value._id}/of/${props.idCateg._id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        }
-      }
+    api.delete(
+      `/category/list/delete/${props.value._id}/of/${props.idCateg._id}`
     );
     props.refresh();
   }
   async function sendStatus(e) {
-    await axios.post(
-      `${API}/category/status/${props.value._id}/of/${props.idCateg._id}`,
-      {
-        status: e.target.checked,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
+    await api.post(
+      `/category/status/${props.value._id}/of/${props.idCateg._id}`,
+      { status: e.target.checked }
     );
     props.refresh();
   }

@@ -1,45 +1,38 @@
 import React, { useEffect, useState } from "react";
 import ColorPicker from "./UI/ColorPicker/ColorPicker";
-import axios from "axios";
+import api from "../api/axios";
 
-const API = "https://todo-categ.onrender.com";
 
 const Category = ({ deleted }) => {
   const [category, setCategory] = useState([]);
   async function fetchCategory() {
-    let res = await (await fetch(`${API}/category`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })).json();
-    setCategory(res);
+    try {
+      const res = await api.get("/category");
+      setCategory(res.data);
+    } catch (err) {
+      console.error(err);
+      if (err.response.data && err.response.data.error == "Invalid token") {
+        localStorage.removeItem("token");
+        alert("token expired");
+      }
+    }
   }
   async function addCategory(event) {
     if (event.code === "Enter") {
-      const value = event.target.value.trim();
-      if (value.length > 0)
-        await axios.post(
-          `${API}/category/add`,
-          { name: value },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
-      event.target.value = "";
-      fetchCategory();
-    }
+      try {
+        const value = event.target.value.trim();
+        if (value.length > 0)
+          await api.post("/category/add", { name: value });
+        event.target.value = "";
+        fetchCategory();
+      } catch (err) {
+        console.log(err);
+      }
+    } 
   }
   function deleteCateg(event) {
-    setTimeout(() => {
-      axios.get(`${API}/category/delete/${event.target.id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+    setTimeout(async () => {
+      await api.get(`/category/delete/${event.target.id}`);
       fetchCategory();
       window.location.replace("/");
     }, 1050);

@@ -1,6 +1,5 @@
-import axios from "axios";
 import { useState } from "react";
-const API = "https://todo-categ.onrender.com";
+import api from "../api/axios";
 
 
 const Signup = () => {
@@ -8,7 +7,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post(`${API}/users/signup`, form);
+    await api.post(`/auth/signup`, form);
     alert("Signup successful!");
     window.location.href = "/login";
   };

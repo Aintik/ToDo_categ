@@ -1,40 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Item from "./Item";
-import axios from "axios";
 import { useParams } from "react-router-dom";
-const API = "https://todo-categ.onrender.com";
+import api from "../api/axios";
+
 
 const Task = () => {
   let { id } = useParams()
   const [category, setCategory] = useState([]);
   async function fetchCategory() {
-    let URL = id ? `${API}/category/one/${id}` : `${API}/category/`;
-    let res = await (
-      await fetch(URL, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-    ).json();
-    setCategory(res);
+    let URL = id ? `/category/one/${id}` : `/category/`;
+    const res = await api.get(URL);
+    setCategory(res.data);
   }
   async function addTask(event) {
     if (event.code === "Enter") {
       const value = event.target.value.trim();
       if (value.length > 0)
-        await axios.post(
-          `${API}/category/list/add/${id}`,
-          {
-            title: value,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
+        await api.post(`/category/list/add/${id}`, { title: value });
       event.target.value = "";
       fetchCategory();
     }

@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Task from "./Task";
 import Category from "./Category";
-import axios from "axios";
+import api from "../api/axios";
 
-const API = "https://todo-categ.onrender.com";
 
-const ToDoPage = async () => {
+const ToDoPage = () => {
   const navigate = useNavigate();
-  await fetch(`${API}`)
+  // ACtivate render.com api
+  api.get('/')
 
   useEffect(() => {
     const token = localStorage.getItem("token");

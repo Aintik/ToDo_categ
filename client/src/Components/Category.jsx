@@ -21,10 +21,11 @@ const Category = ({ deleted }) => {
     if (event.code === "Enter") {
       try {
         const value = event.target.value.trim();
-        if (value.length > 0)
+        if (value.length > 0) {
           await api.post("/category/add", { name: value });
+        }
         event.target.value = "";
-        fetchCategory();
+        await fetchCategory();
       } catch (err) {
         console.log(err);
       }
@@ -33,6 +34,7 @@ const Category = ({ deleted }) => {
   function deleteCateg(event) {
     setTimeout(async () => {
       await api.get(`/category/delete/${event.target.id}`);
+      console.log('deleting');
       fetchCategory();
       window.location.replace("/");
     }, 1050);

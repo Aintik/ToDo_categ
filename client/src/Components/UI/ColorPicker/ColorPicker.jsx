@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import classes from './ColorPicker.module.css'
-import axios from 'axios'
+import api from '../../../api/axios'
 
 
 const ColorPicker = (props) => {
     function click(e) {
-        axios.put(`http://localhost:3001/category/color/${props.categId}`, {
+        api.put(`/category/color/${props.categId}`, {
             color: e.target.style.background
         })
         props.refresh()

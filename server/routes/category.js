@@ -39,8 +39,8 @@ router.get("/names", auth, async function (req, res, next) {
 //Add a Category
 router.post("/add", auth, async function (req, res, next) {
   try {
-    const { name } = await req.body;
-    new Category({ name, userId: req.user.id }).save(() => {
+    const { name } = await req.body;  
+    new Category({ name, userId: req.user.id }).save().then(() => {
       res.json({ message: "Category added" }).status(200);
     });
   } catch (e) {
@@ -53,7 +53,7 @@ router.get("/one/:id", auth, async function (req, res, next) {
   try {
     const data = await Category.findOne({
       _id: req.params.id,
-      userid: req.user.id,
+      userId: req.user.id,
     });
     res.json([data]).status(200);
   } catch (e) {
@@ -65,10 +65,11 @@ router.get("/one/:id", auth, async function (req, res, next) {
 router.put("/color/:id", auth, async function (req, res, next) {
   const { color } = req.body;
   try {
+    console.log('color');
     const data = await Category.findOneAndUpdate(
       {
         _id: req.params.id,
-        userid: req.user.id, // Verify ownership
+        userId: req.user.id, // Verify ownership
       },
       { color },
       { new: true } // Return updated document
@@ -84,7 +85,7 @@ router.get("/delete/:id", auth, async function (req, res, next) {
   try {
     const data = await Category.findOneAndDelete({
       _id: req.params.id,
-      userid: req.user.id, // Verify ownership
+      userId: req.user.id,
     });
     res.json(data).status(200);
   } catch (e) {
@@ -99,7 +100,7 @@ router.post("/list/add/:id", auth, async function (req, res, next) {
     const data = await Category.findOneAndUpdate(
       {
         _id: req.params.id,
-        userid: req.user.id, // Verify ownership
+        userId: req.user.id, // Verify ownership
       },
       {
         $push: { list: { title } },
@@ -122,7 +123,7 @@ router.post("/status/:itemId/of/:id", auth, async function (req, res, next) {
     const data = await Category.findOneAndUpdate(
       {
         _id: id,
-        userid: req.user.id,
+        userId: req.user.id,
         "list._id": itemId,
       },
       {
@@ -143,7 +144,7 @@ router.delete("/list/delete/:itemId/of/:id", auth, async function (req, res, nex
     const data = await Category.findOneAndUpdate(
       {
         _id: id,
-        userid: req.user.id, // Verify ownership
+        userId: req.user.id, // Verify ownership
       },
       {
         $pull: { list: { _id: itemId } },

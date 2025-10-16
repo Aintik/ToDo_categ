@@ -28,7 +28,7 @@ const app = express();
 app.use(logger("dev"));
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://your-frontend-domain.com"],
+    origin: ["http://localhost:3000", "https://todocateg.netlify.app/"],
     credentials: true,
   })
 );

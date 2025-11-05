@@ -4,7 +4,7 @@ import api from '../../../api/axios'
 
 
 const ColorPicker = (props) => {
-    function click(e) {
+  function click(e) {
         api.put(`/category/color/${props.categId}`, {
             color: e.target.style.background
         })

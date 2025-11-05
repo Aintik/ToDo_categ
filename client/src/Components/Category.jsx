@@ -39,6 +39,16 @@ const Category = ({ deleted }) => {
       window.location.replace("/");
     }, 1050);
   }
+  function rewResponse(e) {
+    if (window.matchMedia("screen and (max-width: 550px)").matches) {
+      e.preventDefault();
+      document.querySelectorAll(".tre").forEach((item) => {
+        item.style.display = "none";
+      });
+      e.target.parentElement.parentElement.querySelector(".tre").style.display =
+        "flex";
+    }
+  }
   function rew(e) {
     document.querySelectorAll(".tre").forEach((item) => {
       item.style.display = "none";
@@ -83,6 +93,7 @@ const Category = ({ deleted }) => {
               >
                 <div
                   onMouseEnter={rew}
+                  onClick={rewResponse}
                   className="round"
                   style={{ backgroundColor: item.color }}
                 ></div>{" "}

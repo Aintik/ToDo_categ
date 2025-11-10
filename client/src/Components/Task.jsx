@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Item from "./Item";
 import { useParams } from "react-router-dom";
 import api from "../api/axios";
+import LogoutBtn from "./UI/logoutBtn"
 
 
 const Task = () => {
@@ -26,7 +27,10 @@ const Task = () => {
   }, []);
   return (
     <div className="Task">
-      <h1>Tasks</h1>
+      <div className="logoutcontainer">
+        <h1>Tasks</h1>
+        <LogoutBtn/>
+      </div>
       {id && (
         <input type="text" onKeyPress={addTask} placeholder="Add a task" />
       )}
@@ -36,7 +40,12 @@ const Task = () => {
           <div key={categ._id}>
             {categ.list.map((elem) => {
               return (
-                <Item key={elem._id} value={elem} idCateg={categ} refresh={fetchCategory} />
+                <Item
+                  key={elem._id}
+                  value={elem}
+                  idCateg={categ}
+                  refresh={fetchCategory}
+                />
               );
             })}
           </div>

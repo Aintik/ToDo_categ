@@ -13,7 +13,6 @@ const Login = () => {
     try {
       const res = await api.post(`/auth/login`, form);
       localStorage.setItem("token", res.data.token);
-      alert("Login successful!");
       window.location.href = "/"; // redirect to home or dashboard
     } catch (err) {
       setError(err.response?.data?.error || "Login failed");

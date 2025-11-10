@@ -5,11 +5,11 @@ import api from '../../../api/axios'
 
 const ColorPicker = (props) => {
   function click(e) {
+    console.log('clicked')
         api.put(`/category/color/${props.categId}`, {
             color: e.target.style.background
         })
         props.refresh()
-        window.location.reload()
     }
     return (
         <div className={classes.ColorPicker}>

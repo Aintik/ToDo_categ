@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import ColorPicker from "./UI/ColorPicker/ColorPicker";
 import api from "../api/axios";
+import { useNavigate } from "react-router-dom";
 
 
 const Category = ({ deleted }) => {
   const [category, setCategory] = useState([]);
+  const navigate = useNavigate();
   async function fetchCategory() {
     try {
       const res = await api.get("/category");
@@ -14,6 +16,7 @@ const Category = ({ deleted }) => {
       if (err.response.data && err.response.data.error == "Invalid token") {
         localStorage.removeItem("token");
         alert("token expired");
+        navigate("/login");
       }
     }
   }
